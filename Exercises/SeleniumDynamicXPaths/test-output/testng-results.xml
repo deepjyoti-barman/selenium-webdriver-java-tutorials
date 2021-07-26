@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="23194" started-at="2020-03-07T10:05:45Z" finished-at="2020-03-07T10:06:08Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="23194" started-at="2020-03-07T10:05:45Z" finished-at="2020-03-07T10:06:08Z">
+      <class name="in.redbus.SearchForABusAfterFiftyDaysTest">
+        <test-method status="PASS" signature="searchForABusAfterFiftyDays()[pri:0, instance:in.redbus.SearchForABusAfterFiftyDaysTest@396a51ab]" name="searchForABusAfterFiftyDays" duration-ms="23131" started-at="2020-03-07T10:05:45Z" finished-at="2020-03-07T10:06:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchForABusAfterFiftyDays -->
+      </class> <!-- in.redbus.SearchForABusAfterFiftyDaysTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

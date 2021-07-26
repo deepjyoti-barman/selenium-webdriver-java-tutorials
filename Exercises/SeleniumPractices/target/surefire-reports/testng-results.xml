@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="All Test Suite" duration-ms="68452" started-at="2021-07-26T11:31:10Z" finished-at="2021-07-26T11:32:19Z">
+    <groups>
+    </groups>
+    <test name="EShipperTestOnChrome" duration-ms="68452" started-at="2021-07-26T11:31:10Z" finished-at="2021-07-26T11:32:19Z">
+      <class name="in.lifeofacoder.tests.AppTest">
+        <test-method status="PASS" signature="init()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="init" is-config="true" duration-ms="17892" started-at="2021-07-26T11:31:10Z" finished-at="2021-07-26T11:31:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="loginTest()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="loginTest" duration-ms="4318" started-at="2021-07-26T11:31:28Z" finished-at="2021-07-26T11:31:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginTest -->
+        <test-method status="PASS" signature="navigateToAddNewClaimTest()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="navigateToAddNewClaimTest" duration-ms="42194" started-at="2021-07-26T11:31:32Z" depends-on-methods="in.lifeofacoder.tests.AppTest.loginTest" finished-at="2021-07-26T11:32:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateToAddNewClaimTest -->
+        <test-method status="PASS" signature="createNewClaimTest()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="createNewClaimTest" duration-ms="3310" started-at="2021-07-26T11:32:15Z" depends-on-methods="in.lifeofacoder.tests.AppTest.navigateToAddNewClaimTest" finished-at="2021-07-26T11:32:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createNewClaimTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="tearDown" is-config="true" duration-ms="715" started-at="2021-07-26T11:32:18Z" finished-at="2021-07-26T11:32:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- in.lifeofacoder.tests.AppTest -->
+    </test> <!-- EShipperTestOnChrome -->
+  </suite> <!-- All Test Suite -->
+</testng-results>

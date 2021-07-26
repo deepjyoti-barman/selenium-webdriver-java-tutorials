@@ -1,0 +1,1 @@
+This file is used to demonstrate file upload using Selenium.
