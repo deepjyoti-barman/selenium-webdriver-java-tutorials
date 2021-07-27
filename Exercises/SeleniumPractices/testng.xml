@@ -4,7 +4,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="EShipperTestOnChrome">
         <classes>
-            <class name="in.lifeofacoder.tests.AppTest"></class>
+            <class name="com.eshipper.tests.SchedulePickupTest"></class>
         </classes>
     </test>
 </suite>

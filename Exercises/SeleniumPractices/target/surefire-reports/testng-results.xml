@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
   <reporter-output>
   </reporter-output>
-  <suite name="All Test Suite" duration-ms="68452" started-at="2021-07-26T11:31:10Z" finished-at="2021-07-26T11:32:19Z">
+  <suite name="All Test Suite" duration-ms="170988" started-at="2021-07-27T10:14:03Z" finished-at="2021-07-27T10:16:54Z">
     <groups>
     </groups>
-    <test name="EShipperTestOnChrome" duration-ms="68452" started-at="2021-07-26T11:31:10Z" finished-at="2021-07-26T11:32:19Z">
-      <class name="in.lifeofacoder.tests.AppTest">
-        <test-method status="PASS" signature="init()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="init" is-config="true" duration-ms="17892" started-at="2021-07-26T11:31:10Z" finished-at="2021-07-26T11:31:28Z">
+    <test name="EShipperTestOnChrome" duration-ms="170988" started-at="2021-07-27T10:14:03Z" finished-at="2021-07-27T10:16:54Z">
+      <class name="com.eshipper.tests.SchedulePickupTest">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.eshipper.tests.SchedulePickupTest@6574b225]" name="init" is-config="true" duration-ms="19839" started-at="2021-07-27T10:14:03Z" finished-at="2021-07-27T10:14:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="loginTest()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="loginTest" duration-ms="4318" started-at="2021-07-26T11:31:28Z" finished-at="2021-07-26T11:31:32Z">
+        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.eshipper.tests.SchedulePickupTest@6574b225]" name="loginTest" duration-ms="4557" started-at="2021-07-27T10:14:23Z" finished-at="2021-07-27T10:14:27Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method status="PASS" signature="navigateToAddNewClaimTest()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="navigateToAddNewClaimTest" duration-ms="42194" started-at="2021-07-26T11:31:32Z" depends-on-methods="in.lifeofacoder.tests.AppTest.loginTest" finished-at="2021-07-26T11:32:15Z">
+        <test-method status="PASS" signature="navigateToQuickQuoteTest()[pri:0, instance:com.eshipper.tests.SchedulePickupTest@6574b225]" name="navigateToQuickQuoteTest" duration-ms="17113" started-at="2021-07-27T10:14:27Z" depends-on-methods="com.eshipper.tests.SchedulePickupTest.loginTest" finished-at="2021-07-27T10:14:44Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- navigateToAddNewClaimTest -->
-        <test-method status="PASS" signature="createNewClaimTest()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="createNewClaimTest" duration-ms="3310" started-at="2021-07-26T11:32:15Z" depends-on-methods="in.lifeofacoder.tests.AppTest.navigateToAddNewClaimTest" finished-at="2021-07-26T11:32:18Z">
+        </test-method> <!-- navigateToQuickQuoteTest -->
+        <test-method status="PASS" signature="navigateToOrderSummaryTest()[pri:0, instance:com.eshipper.tests.SchedulePickupTest@6574b225]" name="navigateToOrderSummaryTest" duration-ms="107368" started-at="2021-07-27T10:14:44Z" depends-on-methods="com.eshipper.tests.SchedulePickupTest.navigateToQuickQuoteTest" finished-at="2021-07-27T10:16:32Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createNewClaimTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:in.lifeofacoder.tests.AppTest@3c09711b]" name="tearDown" is-config="true" duration-ms="715" started-at="2021-07-26T11:32:18Z" finished-at="2021-07-26T11:32:19Z">
+        </test-method> <!-- navigateToOrderSummaryTest -->
+        <test-method status="PASS" signature="verifyDetailsInOrderSummaryTest()[pri:0, instance:com.eshipper.tests.SchedulePickupTest@6574b225]" name="verifyDetailsInOrderSummaryTest" duration-ms="21532" started-at="2021-07-27T10:16:32Z" depends-on-methods="com.eshipper.tests.SchedulePickupTest.navigateToOrderSummaryTest" finished-at="2021-07-27T10:16:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyDetailsInOrderSummaryTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.eshipper.tests.SchedulePickupTest@6574b225]" name="tearDown" is-config="true" duration-ms="555" started-at="2021-07-27T10:16:53Z" finished-at="2021-07-27T10:16:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- in.lifeofacoder.tests.AppTest -->
+      </class> <!-- com.eshipper.tests.SchedulePickupTest -->
     </test> <!-- EShipperTestOnChrome -->
   </suite> <!-- All Test Suite -->
 </testng-results>

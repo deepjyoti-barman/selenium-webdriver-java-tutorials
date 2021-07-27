@@ -1,4 +1,4 @@
-package in.lifeofacoder.core;
+package in.lifeofacoder.commons;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -7,7 +7,7 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class Utils {
+public class CoreUtils {
 
     /**
      * It captures the screenshot of the webpage and returns the absolute path of the location where the image is saved

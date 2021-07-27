@@ -1,1 +1,2 @@
-in/lifeofacoder/tests/AppTest.class
+com/eshipper/tests/SchedulePickupTest.class
+com/eshipper/tests/ClaimTIcketGenerationTest.class
