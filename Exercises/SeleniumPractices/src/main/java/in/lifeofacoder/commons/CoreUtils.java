@@ -6,6 +6,9 @@ import org.openqa.selenium.*;
 import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Properties;
 
 public class CoreUtils {
 
@@ -28,6 +31,34 @@ public class CoreUtils {
         return System.getProperty("user.dir") + "/" + imgPath;
     }
 
+    public static String getDate() {
+        return new SimpleDateFormat("MM/dd/yyyy").format(new Date());
+    }
+
+    public static String getDate(String dateFormat) {
+        return new SimpleDateFormat(dateFormat).format(new Date());
+    }
+
+    public static String getDate(String dateFormat, int noOfDaysToAddOrDeduct) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, noOfDaysToAddOrDeduct);
+        return new SimpleDateFormat(dateFormat).format(calendar.getTime());
+    }
+
+    public static String getTime() {
+        return new SimpleDateFormat("HH:mm:ss").format(new Date());
+    }
+
+    public static String getTime(String timeFormat) {
+        return new SimpleDateFormat(timeFormat).format(new Date());
+    }
+
+    public static String getTime(String timeFormat, int noOfHoursToAddOrDeduct) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR_OF_DAY, noOfHoursToAddOrDeduct);
+        return new SimpleDateFormat(timeFormat).format(calendar.getTime());
+    }
+
     /**
      * It converts the current timestamp into a String in the following format:
      *  format: DD-MM-YYYY hh:mm:ss a
@@ -45,12 +76,14 @@ public class CoreUtils {
      *
      * @param driver the current and active driver instance
      * @param element element on the webpage to focus
+     * @return The given web element
      * @author Deepjyoti Barman
      * @since December 26, 2020
      */
-    public static void focus(WebDriver driver, WebElement element) {
+    public static WebElement focus(WebDriver driver, WebElement element) {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("arguments[0].scrollIntoView(true);", element);
+        return element;
     }
 
     /**
@@ -101,5 +134,25 @@ public class CoreUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Searches for the key and returns its value if the key is found in properties file present in the file location given.
+     *
+     * @param key Key to be searched
+     * @param fileLoc Absolute or relative path of the .properties file disk drive
+     * @return Value of the given key
+     * @author Deepjyoti Barman
+     * @since January 20, 2021
+     */
+    public static String getProperty(String key, String fileLoc) throws IOException, InvalidArgumentException {
+        Properties prop = new Properties();
+        prop.load(new FileReader(fileLoc));
+        final String value = prop.getProperty(key);
+
+        if (value == null)
+            throw new InvalidArgumentException("Key not found in the given properties file");
+
+        return value.trim();
     }
 }

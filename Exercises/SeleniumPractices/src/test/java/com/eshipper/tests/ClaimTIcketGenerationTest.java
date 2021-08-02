@@ -1,48 +1,21 @@
 package com.eshipper.tests;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.eshippper.base.Main;
+import com.eshippper.base.TestBase;
+import in.lifeofacoder.commons.CoreUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static in.lifeofacoder.commons.CoreUtils.*;
-
-public class ClaimTIcketGenerationTest extends Main {
+public class ClaimTicketGenerationTest extends TestBase {
 
     @Test
     public void loginTest() {
-        ExtentTest test = extent.createTest("Login to EShipper with valid credentials")
-                .assignAuthor("deepjyoti-barman")
-                .assignCategory("Smoke")
-                .assignCategory("Regression")
-                .assignDevice("macos-big-sur-11.4_chrome-92.0.4515.107");
-        try {
-            driver.findElement(By.cssSelector("#username")).sendKeys("user");
-            test.info("Entered 'user' into the username text field");
-
-            driver.findElement(By.cssSelector("#password")).sendKeys("user");
-            test.info("Entered 'user' into the password text field");
-
-            driver.findElement(By.cssSelector("button[type='submit']")).click();
-            test.info("Clicked on the 'Login' button");
-            test.info("Login to the application with valid credentials is successful");
-        } catch (Exception e) {
-            test.fail(e.getClass().getName() + ": " + e.getMessage());
-
-            try {
-                test.addScreenCaptureFromPath(captureSnapshot(driver));
-                e.printStackTrace();
-                Assert.fail(e.getClass().getName() + ": " + e.getMessage());
-            } catch (IOException ie) {
-                ie.printStackTrace();
-            }
-        }
+        loginWithValidCredentials();
     }
 
     @Test(dependsOnMethods = {"loginTest"})
@@ -77,7 +50,7 @@ public class ClaimTIcketGenerationTest extends Main {
             test.fail(e.getClass().getName() + ": " + e.getMessage());
 
             try {
-                test.addScreenCaptureFromPath(captureSnapshot(driver));
+                test.addScreenCaptureFromPath(CoreUtils.captureSnapshot(driver));
                 e.printStackTrace();
                 Assert.fail(e.getClass().getName() + ": " + e.getMessage());
             } catch (IOException ie) {
@@ -99,8 +72,7 @@ public class ClaimTIcketGenerationTest extends Main {
 
             String fileName = "file-for-upload.txt";
             String filePath = System.getProperty("user.dir") + "/src/test/resources/upload/" + fileName;
-            WebElement fileUploadBtn = driver.findElement(By.xpath("//span[contains(., 'Add Files')]"));
-            focus(driver, fileUploadBtn);
+            CoreUtils.focus(driver, driver.findElement(By.xpath("//span[contains(., 'Add Files')]")));
             driver.findElement(By.cssSelector("input[type='file'][multiple]")).sendKeys(filePath);
             WebElement fileUploadLabel = driver.findElement(By.cssSelector("span.mat-line"));
             Assert.assertEquals(fileUploadLabel.getText(), fileName, "File attachment failed");
@@ -114,7 +86,7 @@ public class ClaimTIcketGenerationTest extends Main {
             test.fail(e.getClass().getName() + ": " + e.getMessage());
 
             try {
-                test.addScreenCaptureFromPath(captureSnapshot(driver));
+                test.addScreenCaptureFromPath(CoreUtils.captureSnapshot(driver));
                 e.printStackTrace();
                 Assert.fail(e.getClass().getName() + ": " + e.getMessage());
             } catch (IOException ie) {

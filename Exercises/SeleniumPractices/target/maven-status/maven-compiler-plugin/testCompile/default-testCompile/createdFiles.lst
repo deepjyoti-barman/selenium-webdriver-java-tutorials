@@ -1,2 +1,3 @@
-com/eshipper/tests/SchedulePickupTest.class
-com/eshipper/tests/ClaimTIcketGenerationTest.class
+com/eshipper/tests/BookShipmentFromShipTest.class
+com/eshipper/tests/BookShipmentFromQQTest.class
+com/eshipper/tests/ClaimTicketGenerationTest.class

@@ -1,2 +1,3 @@
-/Users/deepjyoti.barman/programming-platform/intellij-workspace/SeleniumPractices/src/test/java/com/eshipper/tests/ClaimTIcketGenerationTest.java
-/Users/deepjyoti.barman/programming-platform/intellij-workspace/SeleniumPractices/src/test/java/com/eshipper/tests/SchedulePickupTest.java
+/Users/deepjyoti.barman/programming-platform/intellij-workspace/SeleniumPractices/src/test/java/com/eshipper/tests/ClaimTicketGenerationTest.java
+/Users/deepjyoti.barman/programming-platform/intellij-workspace/SeleniumPractices/src/test/java/com/eshipper/tests/BookShipmentFromShipTest.java
+/Users/deepjyoti.barman/programming-platform/intellij-workspace/SeleniumPractices/src/test/java/com/eshipper/tests/BookShipmentFromQQTest.java
