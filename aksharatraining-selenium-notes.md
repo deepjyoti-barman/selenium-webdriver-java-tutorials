@@ -230,8 +230,9 @@ Automation is performing any task using any system or tool without any manual in
 - We can see the source code of Selenium 4 visiting the URL: [https://github.com/SeleniumHQ/selenium]
 - We can see the source code of Selenium 3 visiting the URL: [https://github.com/SeleniumHQ/selenium/tree/selenium-3.141.59]
 - Super most interface is SearchContent and most frequently used interface is WebDriver.
-- Diagram:
+- Diagram-1:
 ![Internal Architecture in Selenium 4](diagrams/internal-architecture-selenium-4.png)
+- Diagram-2:
 ![Internal Architecture in Selenium 3](diagrams/internal-architecture-selenium-3.png)
 
 ## Runtime Polymorphism and Compatibility Testing
@@ -278,8 +279,10 @@ Automation is performing any task using any system or tool without any manual in
     Bye
     ```
 
-- Diagram:
-![Runtime Polymorphism in Java](diagrams/runtime-polymorphism-java.png)
+- Diagram-1:
+![Runtime Polymorphism in Java](diagrams/runtime-polymorphism-java-1.png)
+- Diagram-2:
+![Runtime Polymorphism in Java](diagrams/runtime-polymorphism-java-2.png)
 
 - Additional Notes:
   - In Java we have two types of memory - stack and heap. Stack is used for execution, heap is used for storage and for every thread one stack is created.
