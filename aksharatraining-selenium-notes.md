@@ -626,8 +626,8 @@ Automation is performing any task using any system or tool without any manual in
 
 - Additional Notes:
   - As majority of the useful methods are present in WebDriver interface, so Selenium always recommends us to upcast the driver object to WebDriver interface.
-- `public static void testBrowser(WebDriver driver) { ... }` is better than `public static void testBrowser(ChromeDriver driver) { ... }` because the first will work in any browser which has support for Selenium hence it will drastically increase the code reusability, but second one will only work for Chrome browser.
-- Upcasting: Converting a child object to parent type, e.g. `WebDriver driver = new ChromeDriver();`. We use this so that same automation script works on any browser.
+  - `public static void testBrowser(WebDriver driver) { ... }` is better than `public static void testBrowser(ChromeDriver driver) { ... }` because the first will work in any browser which has support for Selenium hence it will drastically increase the code reusability, but second one will only work for Chrome browser.
+  - Upcasting: Converting a child object to parent type, e.g. `WebDriver driver = new ChromeDriver();`. We use this so that same automation script works on any browser.
 
 ## List of Exceptions
 
