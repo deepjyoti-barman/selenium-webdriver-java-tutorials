@@ -91,7 +91,7 @@ Automation is performing any task using any system or tool without any manual in
 - Free: Need not to pay for the license [https://www.selenium.dev/downlods]. We can use it to automate an application, we can use it for teaching purpose, we can use selenium give services to anyone an can take money out of him without paying back to the selenium community.
 - Open source: We can see the source code, we can download the source code, we can customize the source code (e.g. Unix, Java, Android etc.), integration with third party tools will be very very easy (Maven, Git, Jenkins etc.)
 
-### Features of Selenium:
+### Features of Selenium
 
 - An automation tool.
 - It is a package/API.
@@ -136,18 +136,115 @@ Automation is performing any task using any system or tool without any manual in
   - Create a folder 'driver' under the Java Project -> Copy and paste the driver executable file into this 'driver' directory.
   - Then complete writing rest of the code as shown below:
 
-  ```java
-    public class Demo1 {
+    ```java
+    // Opening Google in Chrome browser
+    package com.aksharatraining.selenium.c01.basics;
+
+    import org.openqa.selenium.chrome.ChromeDriver;
+
+    public class P01_LaunchChromeBrowser {
+        
         public static void main(String[] args) {
             String key = "webdriver.chrome.driver";
-            // . (dot) in chromedriver.exe path means current java project
-            String value = "./driver/chromedriver.exe";
+            String value = "./driver/chromedriver";
             System.setProperty(key, value);
-
+            
+            // Launch Google Chrome browser window
             ChromeDriver driver = new ChromeDriver();
+        }
+    }
+    ```
+
+    ```log
+    Starting ChromeDriver 97.0.4692.71 (adefa7837d02a07a604c1e6eff0b3a09422ab88d-refs/branch-heads/4692@{#1247}) on port 50449
+    Only local connections are allowed.
+    Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+    ChromeDriver was started successfully.
+    Feb 03, 2022 2:43:50 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+    INFO: Detected dialect: W3C
+    Feb 03, 2022 2:43:50 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    WARNING: Unable to find an exact match for CDP version 97, so returning the closest version found: 96
+    Feb 03, 2022 2:43:50 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    INFO: Found CDP implementation for version 97 of 96
+    ```
+
+    ```java
+    // Opening Google in Chrome browser with static block
+    package com.aksharatraining.selenium.c01.basics;
+
+    import org.openqa.selenium.chrome.ChromeDriver;
+
+    public class P02_LaunchChomeBrowserWithStaticBlock {
+        
+        static {
+            System.setProperty("webdriver.chrome.driver", "./driver/chromedriver");
+        }
+        
+        public static void main(String[] args) {
+            // Launch Google Chrome browser window
+            ChromeDriver driver = new ChromeDriver();
+            
+            // Enter the URL 'https://www.google.com' in the search bar
             driver.get("https://www.google.com");
         }
     }
+    ```
+
+    ```log
+    Starting ChromeDriver 97.0.4692.71 (adefa7837d02a07a604c1e6eff0b3a09422ab88d-refs/branch-heads/4692@{#1247}) on port 50449
+    Only local connections are allowed.
+    Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+    ChromeDriver was started successfully.
+    Feb 03, 2022 2:43:50 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+    INFO: Detected dialect: W3C
+    Feb 03, 2022 2:43:50 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    WARNING: Unable to find an exact match for CDP version 97, so returning the closest version found: 96
+    Feb 03, 2022 2:43:50 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    INFO: Found CDP implementation for version 97 of 96
+    ```
+
+    ```java
+    // Opening Google in Firefox browser
+    package com.aksharatraining.selenium.c01.basics;
+
+    import org.openqa.selenium.firefox.FirefoxDriver;
+
+    public class P03_LaunchFirefoxBrowser {
+        
+        static {
+            System.setProperty("webdriver.gecko.driver", "./driver/geckodriver");
+        }
+        
+        public static void main(String[] args) {
+            // Launch Firefox browser window
+            FirefoxDriver driver = new FirefoxDriver();
+            
+            // Enter the URL 'https://www.google.com' in the search bar
+            driver.get("https://www.google.com");
+        }
+    }
+    ```
+
+    ```log
+    1643836666166	geckodriver	INFO	Listening on 127.0.0.1:52780
+    1643836667037	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "--remote-debugging-port" "54315" "-foreground" "-no-remote" "-profile" "/var/folders/mq/9k9zz53d7sg8d2jthfvp2skckx697z/T/rust_mozprofiledcvEBp"
+    1643836668096	Marionette	INFO	Marionette enabled
+    2022-02-03 02:47:49.163 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSButton: 0x12c352c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 02:47:49.164 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSButton: 0x1381ea000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 02:47:49.165 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSButton: 0x1381e8c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 02:47:49.165 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSButton: 0x1381ec800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 02:47:49.166 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSButton: 0x1381ef400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 02:47:49.166 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x1381eac00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 02:47:49.167 firefox-bin[64767:1491881] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x13854d400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/mq/9k9zz53d7sg8d2jthfvp2skckx697z/T/rust_mozprofiledcvEBp/search.json.mozlz4", (void 0)))
+    console.error: BackgroundUpdate: 
+    _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+    DevTools listening on ws://localhost:54315/devtools/browser/f1e42209-857c-4c53-8857-9d72902770a2
+    1643836670265	Marionette	INFO	Listening on port 62687
+    1643836670339	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+    Feb 03, 2022 2:47:50 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+    INFO: Detected dialect: W3C
+    ```
 
 - Additional Notes:
   - Take a screenshot of the entire window `PrintScrn` (Windows)
@@ -242,6 +339,7 @@ Automation is performing any task using any system or tool without any manual in
 - Example of Runtime polymorphism is shown below:
 
     ```java
+    // Example 1: Runtime polymorphism
     class A {
         void m1() {
             System.out.println("Hi");
@@ -279,6 +377,44 @@ Automation is performing any task using any system or tool without any manual in
     Bye
     ```
 
+    ```java
+    // Example 1: Runtime polymorphism
+    interface A {
+        void m1();
+    }
+
+    class B implements A {
+        public void m1() {
+            System.out.println("m1() of B");
+        }
+    }
+
+    class C implements A {
+        public void m1() {
+            System.out.println("m1() of C");
+        }
+    }
+
+    public class Demo2 {
+        public static void test(A a1) {
+            // In this case prediction of output is not possible
+            // Output depends on the object we pass and based on that JVM will link the method call statement with the method definition during runtime
+            a1.m1();
+        }
+
+        public static void main(String[] args) {
+            Demo2.test(new B());        // m1() of B
+
+            Demo2.test(new C());        // m1() of C
+        }
+    }
+    ```
+
+    ```log
+    m1() of B
+    m1() of C
+    ```
+
 - Diagram-1:
 ![Runtime Polymorphism in Java](diagrams/runtime-polymorphism-java-1.png)
 - Diagram-2:
@@ -289,8 +425,168 @@ Automation is performing any task using any system or tool without any manual in
   - Compiler will write a constructor for us if there is no constructor that is known as default constructor. Default constructor is always no argument constructor. Whenever any class is extending another class compiler will add super() call statement inside the child class constructor - which will load non-static members of the parent class.
   - Loading of all non-static properties and methods into the object will start from top to bottom, i.e. parent class's members will be loaded in memory first then the properties of the child class will be loaded (class Object -> class A -> class B). Hence in the above example, a2.m1() will call the method m1() which is overridden in the object.
   - For upcasting we should have IS-A relationship between two classes.
+  - The linking between the method calling statement to the method definition is done by the JVM during runtime time which is called as Runtime polymorphism.
+  - Method overriding is an example of Runtime polymorphism.
+  - 3 Things required for Runtime polymorphism: inheritance (IS-A relationship), overriding and upcasting.
+
+### Compile-time Polymorphism in Java
+
+- Example of Compile-time polymorphism is shown below:
+
+    ```java
+    class A {
+        void m1() {
+            System.out.println(0);
+        }
+
+        void m1(String s) {
+            System.out.println(s);
+        }
+    }
+
+    public class Demo1 {
+        public static void test(A a1) {
+            // Compile-time polymorphism: Compiler will link this m1() method call with first m1() method definition with no arguments
+            a1.m1();
+        }
+
+        public static void main(String[] args) {
+            test(new A());        // 0
+        }
+    }
+    ```
+
+    ```log
+    0
+    ```
+
+- Additional Notes:
+  - The linking between the method calling statement to the method definition is done by the compiler during compile time which is called as Compile-time polymorphism.
+  - Method overloading is an example of Compile-time polymorphism.
+
+### Code Optimization Rules
+
+- Example of code optimization is shown below:
+
+    ```java
+    // Example 1: Code optimization
+    public class Demo3 {
+        public static void main(String[] args) {
+            /*
+            // Without code optimization
+            int i;
+            int j;
+            int k;
+            i = 10;
+            j = 20;
+
+            k = i + j;
+            System.out.println(k);
+            */
+
+            // Applying code optimization
+            int i = 10;
+            int j = 20;
+            System.out.println(i + j);
+        }
+    }
+    ```
+
+    ```log
+    30
+    ```
+
+    ```java
+    // Example 2: Code optimization
+    class P {
+        static String test() {
+            String name = "Bhanu";
+            return name;
+        }
+    }
+
+    public class Demo3 {
+        public static void main(String[] args) {
+            /*
+            // Without code optimization
+            String s = P.test();
+            int l = s.length();
+            System.out.println(l);
+            */
+
+            // Applying code optimization
+            // length() method is present in the object returned by test() method (i.e. String class)
+            // P.test().length(), calling a method like this one after another is called method chaining
+            int l = P.test().length();
+            System.out.println(l);
+        }
+    }
+    ```
+
+    ```log
+    30
+    ```
+
+- Additional Notes:
+  - Sometimes we need to reduce the number of lines of a code, this is possible using a concept called code optimization.
+  - We can merge two statements if:
+    - There must be a common variable between those two statements.
+    - For that common variable there must be assignment operator (=) in first statement.
+    - In second statement we can replace the common variable with its RHS from first statement.
+    - Finally we can delete the first statement.
+  - Advantage of code optimization is it will reduce the number of lines of code.
+  - Disadvantage of code optimization is it will reduce the reusability.
+  - In System.out.println(), out is the static reference variable present in System class through which we are calling the non-static method println() present in PrintStream class. That means, out reference variable is pointing to the object of PrintStream class and type of out is also PrintStream. This out reference variable has public static and final access and non-access modifiers.
+  - println() is the best example of method overloading.
 
 ### Use of Runtime Polymorphism in Selenium
+
+- Example of Compatibility Testing in Selenium:
+
+    ```java
+    package com.aksharatraining.selenium.c01.basics;
+
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.chrome.ChromeDriver;
+    import org.openqa.selenium.firefox.FirefoxDriver;
+
+    public class P04_CrossBrowserTestingUsingRTP {
+        
+        static {
+            
+            System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
+            System.setProperty("webdriver.gecko.driver", "driver/geckodriver");
+        }
+        
+        // JVM will perform upcasting during runtime
+        public static void testBrowser(WebDriver driver) {
+            
+            // Enter the URL
+            driver.get("https://www.google.co.in");
+            
+            // Retrieve the title of the webpage and print it
+            String title = driver.getTitle();
+            System.out.println(driver instanceof ChromeDriver ? 
+                    "Title from Chrome browser: " + title : 
+                        "Title from Firefox browser: " + title);
+            
+            // Close the browser window
+            // Based on the object we pass the respective close() method of the class will be invoked, hence this is an example of Runtime Polymorphism
+            driver.close();
+        }
+        
+        public static void main(String[] args) {
+            
+            P04_CrossBrowserTestingUsingRTP.testBrowser(new ChromeDriver());
+            P04_CrossBrowserTestingUsingRTP.testBrowser(new FirefoxDriver());
+        }
+    }
+    ```
+
+- Additional Notes:
+  - As majority of the useful methods are present in WebDriver interface, so Selenium always recommends us to upcast the driver object to WebDriver interface.
+- `public static void testBrowser(WebDriver driver) { ... }` is better than `public static void testBrowser(ChromeDriver driver) { ... }` because the first will work in any browser which has support for Selenium hence it will drastically increase the code reusability, but second one will only work for Chrome browser.
+- Upcasting: Converting a child object to parent type, e.g. `WebDriver driver = new ChromeDriver();`. We use this so that same automation script works on any browser.
 
 ## List of Exceptions
 
