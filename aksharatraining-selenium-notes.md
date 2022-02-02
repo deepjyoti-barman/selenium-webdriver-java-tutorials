@@ -569,7 +569,10 @@ Automation is performing any task using any system or tool without any manual in
             System.out.println(driver instanceof ChromeDriver ? 
                     "Title from Chrome browser: " + title : 
                         "Title from Firefox browser: " + title);
+<<<<<<< HEAD
             System.out.println();
+=======
+>>>>>>> 1dde00b857d3860596fbddbe39cca919d0a576a2
             
             // Close the browser window
             // Based on the object we pass the respective close() method of the class will be invoked, hence this is an example of Runtime Polymorphism
@@ -584,6 +587,7 @@ Automation is performing any task using any system or tool without any manual in
     }
     ```
 
+<<<<<<< HEAD
     ```log
     Starting ChromeDriver 97.0.4692.71 (adefa7837d02a07a604c1e6eff0b3a09422ab88d-refs/branch-heads/4692@{#1247}) on port 64581
     Only local connections are allowed.
@@ -624,6 +628,8 @@ Automation is performing any task using any system or tool without any manual in
     ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
     ```
 
+=======
+>>>>>>> 1dde00b857d3860596fbddbe39cca919d0a576a2
 - Additional Notes:
   - As majority of the useful methods are present in WebDriver interface, so Selenium always recommends us to upcast the driver object to WebDriver interface.
 - `public static void testBrowser(WebDriver driver) { ... }` is better than `public static void testBrowser(ChromeDriver driver) { ... }` because the first will work in any browser which has support for Selenium hence it will drastically increase the code reusability, but second one will only work for Chrome browser.
