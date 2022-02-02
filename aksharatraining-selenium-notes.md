@@ -569,6 +569,7 @@ Automation is performing any task using any system or tool without any manual in
             System.out.println(driver instanceof ChromeDriver ? 
                     "Title from Chrome browser: " + title : 
                         "Title from Firefox browser: " + title);
+            System.out.println();
             
             // Close the browser window
             // Based on the object we pass the respective close() method of the class will be invoked, hence this is an example of Runtime Polymorphism
@@ -581,6 +582,46 @@ Automation is performing any task using any system or tool without any manual in
             P04_CrossBrowserTestingUsingRTP.testBrowser(new FirefoxDriver());
         }
     }
+    ```
+
+    ```log
+    Starting ChromeDriver 97.0.4692.71 (adefa7837d02a07a604c1e6eff0b3a09422ab88d-refs/branch-heads/4692@{#1247}) on port 64581
+    Only local connections are allowed.
+    Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+    ChromeDriver was started successfully.
+    Feb 03, 2022 3:07:17 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+    INFO: Detected dialect: W3C
+    Feb 03, 2022 3:07:17 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    WARNING: Unable to find an exact match for CDP version 97, so returning the closest version found: 96
+    Feb 03, 2022 3:07:17 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    INFO: Found CDP implementation for version 97 of 96
+    Title from Chrome browser: Google
+
+    1643837840338	geckodriver	INFO	Listening on 127.0.0.1:60407
+    1643837841350	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "--remote-debugging-port" "60337" "-foreground" "-no-remote" "-profile" "/var/folders/mq/9k9zz53d7sg8d2jthfvp2skckx697z/T/rust_mozprofile7RGfUz"
+    1643837841737	Marionette	INFO	Marionette enabled
+    2022-02-03 03:07:22.304 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSButton: 0x12d17d800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 03:07:22.304 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSButton: 0x137c73800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 03:07:22.305 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSButton: 0x137c6d400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 03:07:22.306 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSButton: 0x137c73c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 03:07:22.306 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSButton: 0x137c74000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 03:07:22.307 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x137c6d800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    2022-02-03 03:07:22.307 firefox-bin[65906:1504954] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x137ce7800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+    console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/mq/9k9zz53d7sg8d2jthfvp2skckx697z/T/rust_mozprofile7RGfUz/search.json.mozlz4", (void 0)))
+    console.error: BackgroundUpdate: 
+    _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+    DevTools listening on ws://localhost:60337/devtools/browser/5133c21c-8263-4e6b-b24c-85ef8d5414f1
+    1643837843268	Marionette	INFO	Listening on port 63008
+    1643837843323	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+    Feb 03, 2022 3:07:23 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+    INFO: Detected dialect: W3C
+    Title from Firefox browser: Google
+
+    Feb 03, 2022 3:07:25 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+    INFO: Found exact CDP implementation for version 85
+    1643837845662	Marionette	INFO	Stopped listening on port 63008
+
+    ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
     ```
 
 - Additional Notes:
