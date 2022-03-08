@@ -629,6 +629,938 @@ Automation is performing any task using any system or tool without any manual in
   - `public static void testBrowser(WebDriver driver) { ... }` is better than `public static void testBrowser(ChromeDriver driver) { ... }` because the first will work in any browser which has support for Selenium hence it will drastically increase the code reusability, but second one will only work for Chrome browser.
   - Upcasting: Converting a child object to parent type, e.g. `WebDriver driver = new ChromeDriver();`. We use this so that same automation script works on any browser.
 
+## Selenium Grid
+
+### Installation and Requirements
+
+1. Remote system (Node) requirements: An OS (Windows, Linux, Mac), Java/JRE, Browser, Driver Executables, selenium-server-4.x.x.jar.
+2. Local system (Hub) requirements: An OS (Windows, Linux, Mac), JDK, Any IDE (Eclipse, IntelliJ etc.), Plugins like TestNG, JUnit etc.  
+__Note:__ In standalone mode Hub and Node resides in the same system.
+3. Create a folder 'Remote' in the remote system.
+4. Copy paste selenium-server-4.x.x.jar file and driver executable files into it
+5. Open 'Terminal' / 'Command Prompt' and go to the location where selenium-server-4.x.x.jar and driver executable files are present.
+6. Run the following command to start up Selenium Grid in Standalone mode:  
+`java -jar selenium-server-4.1.2.jar standalone --port 4444`
+7. Once the above command is initiated the following message can be seen:  
+`Started Selenium Standalone 4.1.2 (revision 9a5a329c5a): http://192.168.29.35:4444`
+8. Open the browser and enter the URL (URL of the remote system where Selenium Grid is running) `http://192.168.29.35:4444` (In case you are running Selenium Grid on the same device you can also use `http://localhost:4444`). Selenium Grid page should be displayed.  
+__Note:__ Deprecated URL for Selenium Grid in version 3.141.59 `http://192.168.29.35:4444/grid/console`]
+9. Develop test script.
+10. Run the test script on the URL where Selenium Grid is running using RemoteWebDriver class.
+
+### Features of Selenium Grid
+
+- Selenium Grid is used for distributed test automation in remote systems.
+- 3 grid types are supported in Selenium 4:
+  - Standalone Mode
+  - Classical Grid (Hub and Node like earlier versions)
+  - Fully Distributed (Router, Distributor, Session, and Node)
+    - Router: Listens to the new session request.
+    - Distributor: Selects the appropriate node where the test should be executed.
+    - Session Map: Maps the session ID to the node.
+    - Node: Test machine where the test execution takes place.
+- URL to monitor sessions: `http://192.168.29.35:4444/status`
+- URL to connect and execute test cases via RemoteWebDriver in Selenium 3: `http://localhost:4444/wd/hub`
+- URL to connect and execute test cases via RemoteWebDriver in Selenium 4: `http://localhost:4444`
+- Minimum command to run Selenium Grid in version 3:  
+`java -jar selenium-server-standalone-3.141.59.jar`
+- Minimum command to run Selenium Grid in version 4:  
+`java -jar selenium-server-4.1.1.jar standalone`
+- Command to run Selenium Grid as Hub in version 3:  
+`java -jar selenium-server-standalone-3.141.59.jar -role hub`
+- Command to run Selenium Grid as Hub in version 4:  
+`java -jar selenium-server-4.1.1.jar hub`
+- Command to run Selenium Grid as Node in version 3:  
+`java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://192.168.29.35:4444/grid/register/`
+- Command to run Selenium Grid as Node in version 4 (Same system):  
+`java -jar selenium-server-4.1.1.jar node --detect-drivers`
+- Command to run Selenium Grid as Node in version 4 (Different system):  
+`java -jar selenium-server-4.1.1.jar node --detect-drivers --publish-events tcp://192.168.29.35:4442 --subscribe-events tcp://192.168.29.35:4443`
+- Max. concurrency in Selenium Grid by default: 12 (We may alter it)
+
+### Detailed Explanation on Selenium Grid
+
+- [LambdaTest - Selenium Grid 4](https://www.lambdatest.com/blog/selenium-grid-4-tutorial-for-distributed-testing/)
+- [BrowserStack - Selenium Grid 4](https://www.browserstack.com/guide/selenium-grid-4-tutorial)
+- [Codoid - Selenium Grid](https://codoid.com/selenium-testing/selenium-grid-tutorial/)
+- [Selenium.dev - Official Documentation on Selenium Grid 4](https://www.selenium.dev/documentation/grid/)
+- [DZone - Selenium Grid 4](https://dzone.com/articles/selenium-grid-4-tutorial-for-distributed-testing)
+
+```java
+// Example: Selenium Grid using DesiredCapabilities class
+package com.aksharatraining;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Test;
+
+public class SeleniumGridUsingDC {
+
+    @Test
+    public void testA() throws InterruptedException, MalformedURLException {
+        
+        // Entering the URL of remote system
+        // URL remoteAddress = new URL("http://localhost:4444");
+        URL remoteAddress = new URL("http://192.168.29.35:4444");
+        
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        // capabilities.setCapability(CapabilityType.BROWSER_NAME, "chrome");
+        capabilities.setBrowserName("chrome");
+        capabilities.setPlatform(Platform.ANY);                // Any OS
+        // capabilities.setPlatform(Platform.BIG_SUR);         // MacOS 11.0
+        // capabilities.setPlatform(Platform.MAC);             // Any MacOS
+        // capabilities.setPlatform(Platform.LINUX);           // Linux OS (Ubuntu, Fedora, Linux Mint etc)
+        // capabilities.setPlatform(Platform.VISTA);           // Windows 7
+        // capabilities.setPlatform(Platform.WIN10);           // Windows 10
+        
+        // Note: Use of DesiredCapabilities class is deprecated from Selenium 4, hence use of browser Options classes are recommended
+        WebDriver driver = new RemoteWebDriver(remoteAddress, capabilities);
+        driver.get("https://demo.actitime.com/login.do");
+    }
+}
+```
+
+---
+
+```java
+// Example: Selenium Grid using browser Options classes
+package com.aksharatraining;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+// Note: Use of DesiredCapabilities class is deprecated from Selenium 4, hence use of browser Options classes are recommended
+public class SeleniumGridUsingOptions {
+
+    final String defaultUrl = "http://localhost:4444",
+            defaultBrowser = "firefox",
+            defaultCoordsX = "0";
+
+    @Parameters({ "remoteUrl", "browser", "coordsX" })
+    @Test
+    public void testA(@Optional(defaultUrl) String remoteUrl,
+            @Optional(defaultBrowser) String browser,
+            @Optional(defaultCoordsX) String coordsX) throws InterruptedException, MalformedURLException {
+
+        WebDriver driver = null;
+        
+        if (browser.equalsIgnoreCase("chrome")) {
+            driver = new RemoteWebDriver(new URL(remoteUrl), new ChromeOptions());
+        }
+        else if (browser.equalsIgnoreCase("firefox")) {
+            driver = new RemoteWebDriver(new URL(remoteUrl), new FirefoxOptions());
+        }
+        else {
+            System.out.println("Browser is not supported");
+            System.exit(0);
+        }
+
+        // Resize the browser window
+        Dimension d = new Dimension(300, 600);
+        driver.manage().window().setSize(d);
+
+        // Alter the position of the browser window according the coordinates passed
+        int x = Integer.parseInt(coordsX);
+        Point p = new Point(x, 0);
+        driver.manage().window().setPosition(p);
+
+        driver.get("https://demo.actitime.com/login.do");
+
+        for (int i = 1; i <= 10; i++) {
+            driver.findElement(By.id("username")).sendKeys("admin");
+            Thread.sleep(500);
+            driver.findElement(By.id("username")).clear();
+            Thread.sleep(500);
+        }
+
+        driver.close();
+    }
+}
+```
+
+```xml
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Suite" parallel="tests">
+    <test name="TestGC">
+        <parameter name="remoteURL" value="http://localhost:4444" />
+        <parameter name="browser" value="chrome" />
+        <parameter name="coordsX" value="0" />
+        <classes>
+            <class name="day33.SeleniumGridUsingOptions" />
+        </classes>
+    </test>
+    <test name="TestFF">
+        <parameter name="remoteURL" value="http://localhost:4444" />
+        <parameter name="browser" value="firefox" />
+        <parameter name="coordsX" value="600" />
+        <classes>
+            <class name="day33.SeleniumGridUsingOptions" />
+        </classes>
+    </test>
+</suite>
+```
+
+### Running Automated Tests in SauceLabs
+
+```java
+// Example: Running automated selenium tests in parallel in SauceLabs
+package com.aksharatraining;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.locators.RelativeLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+public class RunningTestsInSauceLabs {
+    
+    WebDriver driver = null;
+    AbstractDriverOptions<?> browserOptions = null;
+    WebDriverWait wait = null;
+    JavascriptExecutor jse = null;
+    
+    // Get username and access key for SauceLabs from 'Account' -> 'User Settings'
+    // and set them as 'Environment Variables' for testng_day33_rtisaucelabs.xml
+    // right click on testng_day33_rtisaucelabs.xml -> Run As -> Run Configurations -> Environment
+    public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+    public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+    
+    @Parameters({ "remoteUrl", "os", "browser", "browserVersion",  "coordsX" })
+    @BeforeMethod
+    public void setUp(@Optional("http://localhost:4444") String remoteUrl,
+            @Optional("Windows 10") String os,
+            @Optional("chrome") String browser,
+            @Optional("latest") String browserVersion,
+            @Optional("0") String coordsX) throws MalformedURLException {
+        
+        if (browser.equalsIgnoreCase("chrome")) {
+            browserOptions = new ChromeOptions();
+        }
+        else if (browser.equalsIgnoreCase("firefox")) {
+            browserOptions = new FirefoxOptions();
+        }
+        else {
+            System.out.println("Browser is not supported");
+            System.exit(0);
+        }
+        
+        // To run the script in local/standalone system, comment the following lines
+        // Platform configurator: https://saucelabs.com/platform/platform-configurator
+        // -------- Comment Start --------
+        browserOptions.setPlatformName(os);
+        browserOptions.setBrowserVersion(browserVersion);
+        
+        // Default screen resolution for tests in SauceLabs is 1024x768
+        Map<String, Object> sauceOptions = new HashMap<>();
+        String testName = this.getClass().getSimpleName() + " - " + os + " - " + browser; 
+        sauceOptions.put("username", USERNAME);
+        sauceOptions.put("accessKey", ACCESS_KEY);
+        sauceOptions.put("screenResolution", "1600x1200");
+        sauceOptions.put("chromedriverVersion", "98.0.4758.102");
+        sauceOptions.put("geckodriverVersion", "0.30.0");
+        sauceOptions.put("seleniumVersion", "4.1.1");
+        sauceOptions.put("name", testName);
+        browserOptions.setCapability("sauce:options", sauceOptions);
+        // -------- Comment End --------
+        
+        driver = new RemoteWebDriver(new URL(remoteUrl), browserOptions);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        jse = (JavascriptExecutor) driver;
+        driver.manage().window().setSize(new Dimension(600, 900));
+        driver.manage().window().setPosition(new Point(Integer.parseInt(coordsX), 0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+        driver.get("https://www.saucedemo.com");
+    }
+    
+    @Test
+    public void getSauceLabsBackpackPriceTest() throws InterruptedException {
+        
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+        
+        wait.until(ExpectedConditions.urlContains("inventory.html"));
+        String actualPrice = "$29.99";
+        String expectedPrice = driver.findElement(
+                RelativeLocator.with(By.className("inventory_item_price"))
+                    .below(By.xpath("//div[text()='Sauce Labs Backpack']"))).getText();
+        
+        Reporter.log("Cost of 'Sauce Labs Backpack': " + expectedPrice, true);
+        Assert.assertEquals(actualPrice, expectedPrice);
+        
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("logout_sidebar_link")).click();
+    }
+    
+    @AfterMethod(alwaysRun = true)
+    public void analyzeTest(ITestResult result) {
+        String status = result.isSuccess() ? "passed" : "failed";
+        jse.executeScript("sauce:job-result=" + status);
+    }
+    
+    @AfterClass(alwaysRun = true)
+    public void tearDown() {
+        if (driver != null)
+            driver.close();
+    }
+}
+```
+
+```xml
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="3">
+    <test name="SauceLabs Test - Chrome">
+        <parameter name="remoteUrl" value="https://ondemand.eu-central-1.saucelabs.com:443/wd/hub" />
+        <parameter name="os" value="Windows 11" />
+        <parameter name="browser" value="chrome" />
+        <parameter name="browserVersion" value="98" />
+        <parameter name="coordsX" value="0" />
+        <classes>
+            <class name="day33.RunningTestsInSauceLabs" />
+        </classes>
+    </test>
+    <test name="SauceLabs Test - Firefox">
+        <parameter name="remoteUrl" value="https://ondemand.eu-central-1.saucelabs.com:443/wd/hub" />
+        <parameter name="os" value="macOS 12" />
+        <parameter name="browser" value="firefox" />
+        <parameter name="browserVersion" value="latest" />
+        <parameter name="coordsX" value="800" />
+        <classes>
+            <class name="day33.RunningTestsInSauceLabs" />
+        </classes>
+    </test>
+</suite>
+```
+
+### Running Automated Tests in BrowserStack
+
+```java
+// Example: Running automated selenium tests in BrowserStack
+package com.aksharatraining;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.locators.RelativeLocator;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+public class RunningTestsInBrowserStack {
+
+    WebDriver driver = null;
+    AbstractDriverOptions<?> browserOptions = null;
+    WebDriverWait wait = null;
+    JavascriptExecutor jse = null;
+    
+    // Get username and access key for BrowserStack from 'Profile' icon -> 'Settings'
+    // and set them as 'Environment Variables' for testng_day33_rtibrowserstack.xml
+    // right click on testng_day33_rtibrowserstack.xml -> Run As -> Run Configurations -> Environment
+    public static final String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
+    public static final String ACCESS_KEY = System.getenv("BROWSERSTACK_ACCESS_KEY");
+    
+    @Parameters({ "remoteUrl", "os", "osVersion", "browser", "browserVersion",  "coordsX" })
+    @BeforeMethod
+    public void setUp(@Optional("http://localhost:4444") String remoteUrl,
+            @Optional("Windows") String os,
+            @Optional("10") String osVersion,
+            @Optional("Chrome") String browser,
+            @Optional("latest") String browserVersion,
+            @Optional("0") String coordsX) throws MalformedURLException {
+        
+        if (browser.equalsIgnoreCase("chrome")) {
+            browserOptions = new ChromeOptions();
+        }
+        else if (browser.equalsIgnoreCase("firefox")) {
+            browserOptions = new FirefoxOptions();
+        }
+        else {
+            System.out.println("Browser is not supported");
+            System.exit(0);
+        }
+        
+        // To run the script in local/standalone system, comment the following lines
+        // Platform configurator: https://www.browserstack.com/automate/capabilities?tag=selenium-4
+        // -------- Comment Start --------
+        browserOptions.setCapability("browserName", browser);
+        browserOptions.setCapability("browserVersion", browserVersion);
+        
+        // Default screen resolution for tests in BrowserStack is 1980 x 1080
+        Map<String, Object> browserstackOptions = new HashMap<String, Object>();
+        String testName = this.getClass().getSimpleName() + " - " + os + " - " + browser; 
+        browserstackOptions.put("userName", USERNAME);
+        browserstackOptions.put("accessKey", ACCESS_KEY);
+        browserstackOptions.put("os", os);
+        browserstackOptions.put("osVersion", osVersion);
+        browserstackOptions.put("projectName", "SeleniumWebDriverTutorials");
+        browserstackOptions.put("sessionName", testName);
+        browserstackOptions.put("buildName", "Build v0.5");
+        // browserstackOptions.put("resolution", "1600x1200");
+        // browserstackOptions.put("local", "false");          // Test localhost / internal servers in your network
+        // browserstackOptions.put("debug", "true");           // Generate screenshots at various steps in your test
+        // browserstackOptions.put("consoleLogs", "verbose");  // Capture browser console logs at various steps in your test
+        // browserstackOptions.put("networkLogs", "true");     // Capture network logs for your test
+        browserstackOptions.put("seleniumVersion", "4.1.2");
+        browserOptions.setCapability("bstack:options", browserstackOptions);
+        // -------- Comment End --------
+        
+        driver = new RemoteWebDriver(new URL(remoteUrl), browserOptions);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        jse = (JavascriptExecutor) driver;
+        driver.manage().window().setSize(new Dimension(600, 900));
+        driver.manage().window().setPosition(new Point(Integer.parseInt(coordsX), 0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+        driver.get("https://www.saucedemo.com");
+    }
+    
+    @Test
+    public void getSauceLabsBackpackPriceTest() {
+        
+        try {
+            driver.findElement(By.id("user-name")).sendKeys("standard_user");
+            driver.findElement(By.id("password")).sendKeys("secret_sauce");
+            driver.findElement(By.id("login-button")).click();
+            
+            wait.until(ExpectedConditions.urlContains("inventory.html"));
+            String actualPrice = "$29.99";
+            String expectedPrice = driver.findElement(
+                    RelativeLocator.with(By.className("inventory_item_price"))
+                        .below(By.xpath("//div[text()='Sauce Labs Backpack']"))).getText();
+            
+            Reporter.log("Cost of 'Sauce Labs Backpack': " + expectedPrice, true);
+            Assert.assertEquals(actualPrice, expectedPrice);
+            // Setting the status of test as 'Passed' or 'Failed' on BrowserStack
+            jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": "
+                    + "{\"status\": \"passed\", \"reason\": \"URL and cost matched!\"}}");
+            
+            driver.findElement(By.id("react-burger-menu-btn")).click();
+            Thread.sleep(1000);
+            driver.findElement(By.id("logout_sidebar_link")).click();
+        } catch (Exception e) {
+            String message = e.toString();
+            jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": "
+                    + "{\"status\": \"failed\", \"reason\": \"" + message + "\"}}");
+            Reporter.log(message, true);
+            e.printStackTrace();
+        }
+    }
+    
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        if (driver != null)
+            driver.quit();
+    }
+}
+```
+
+```xml
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="3">
+    <test name="BrowserStack Test - Chrome">
+        <parameter name="remoteUrl" value="https://hub-cloud.browserstack.com/wd/hub" />
+        <parameter name="os" value="Windows" />
+        <parameter name="osVersion" value="11" />
+        <parameter name="browser" value="Chrome" />
+        <parameter name="browserVersion" value="98.0" />
+        <parameter name="coordsX" value="0" />
+        <classes>
+            <class name="day33.RunningTestsInBrowserStack" />
+        </classes>
+    </test>
+    <test name="BrowserStack Test - Firefox">
+        <parameter name="remoteUrl" value="https://hub-cloud.browserstack.com/wd/hub" />
+        <parameter name="os" value="OS X" />
+        <parameter name="osVersion" value="Monterey" />
+        <parameter name="browser" value="Firefox" />
+        <parameter name="browserVersion" value="latest" />
+        <parameter name="coordsX" value="800" />
+        <classes>
+            <class name="day33.RunningTestsInBrowserStack" />
+        </classes>
+    </test>
+</suite>
+```
+
+__Note:__
+
+- BrowserStack does not know when you are done with all the steps in your Selenium test.
+- The driver.quit() Selenium command, helps us identify that all the steps of the Automate test are finished and the test is completed.
+- You should call the driver.quit() command after all the steps in your test script.
+- Alternate solution:
+  - BrowserStack triggers the BROWSERSTACK_IDLE_TIMEOUT error when a session is left idle for more than 90 seconds.
+  - The browserstack.idleTimeout capability helps you to change the timeout value in case the web page takes longer than 90 seconds to open.
+  - You can set a timeout value from 0 to 300 seconds.
+  - The default value is 90 seconds.
+  - Code Snippet:
+
+    ```java
+    DesiredCapabilities caps = new DesiredCapabilities();
+    caps.setCapability("browserstack.idleTimeout", "300");
+    ```
+
+## Generate and Monitor Browser Logs
+
+### Minimal Logs
+
+```java
+// Example: Code to generate minimal browser logs based on the actions performed by Selenium
+package com.aksharatraining.selenium.c01.basics;
+
+import java.util.logging.Level;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class P05_EnableSeleniumBrowserLogs_M1 {
+    
+    static {
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        
+        WebDriver driver = new ChromeDriver();
+        ((RemoteWebDriver) driver).setLogLevel(Level.INFO);
+        
+        driver.get("http://www.google.com");
+        driver.switchTo().activeElement().sendKeys("Akshara Training", Keys.ENTER);
+        driver.close();
+    }
+}
+```
+
+```log
+Starting ChromeDriver 98.0.4758.80 (7f0488e8ba0d8e019187c6325a16c29d9b7f4989-refs/branch-heads/4758@{#972}) on port 52578
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+[1646778106.759][WARNING]: This version of ChromeDriver has not been tested with Chrome version 99.
+Mar 09, 2022 3:51:46 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Mar 09, 2022 3:51:47 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 99, so returning the closest version found: 97
+Mar 09, 2022 3:51:47 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+INFO: Found CDP implementation for version 99 of 97
+Mar 09, 2022 3:51:47 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executing: get [ed533bdb319939a513f3fbd1a44b7ef7, get {url=http://www.google.com}]
+Mar 09, 2022 3:51:49 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executed: (Response: SessionID: ed533bdb319939a513f3fbd1a44b7ef7, Status: 0, Value: null)
+Mar 09, 2022 3:51:49 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executing: getActiveElement [ed533bdb319939a513f3fbd1a44b7ef7, getActiveElement {}]
+Mar 09, 2022 3:51:49 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executed: (Response: SessionID: ed533bdb319939a513f3fbd1a44b7ef7, Status: 0, Value: {element-6066-11e4-a52e-4f735466cecf=1f01575f-cbb5-484d-b439-d392aa372ecb})
+Mar 09, 2022 3:51:49 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executing: sendKeysToElement [ed533bdb319939a513f3fbd1a44b7ef7, sendKeysToElement {id=1f01575f-cbb5-484d-b439-d392aa372ecb, value=[Ljava.lang.CharSequence;@2421cc4}]
+Mar 09, 2022 3:51:54 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executed: (Response: SessionID: ed533bdb319939a513f3fbd1a44b7ef7, Status: 0, Value: null)
+Mar 09, 2022 3:51:54 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executing: close [ed533bdb319939a513f3fbd1a44b7ef7, close {}]
+Mar 09, 2022 3:51:54 AM org.openqa.selenium.remote.RemoteWebDriver log
+INFO: Executed: (Response: SessionID: ed533bdb319939a513f3fbd1a44b7ef7, Status: 0, Value: [])
+```
+
+### Detailed Logs
+
+```java
+// Example: Code to generate detailed browser logs based on the actions performed by Selenium
+package com.aksharatraining.selenium.c01.basics;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class P06_EnableSeleniumBrowserLogs_M2 {
+    
+    static {
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
+        
+        // Setting up logging properties for Chrome
+        System.setProperty("webdriver.chrome.logfile", "logs/chrome_logs.log");
+        
+        // Setting up logging properties for Firefox
+        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "logs/firefox_logs.log");
+    }
+    
+    public static void main(String[] args) throws InterruptedException {
+        
+        WebDriver driver = new ChromeDriver();
+        
+        driver.get("http://www.google.com");
+        driver.switchTo().activeElement().sendKeys("Akshara Training", Keys.ENTER);
+        driver.close();
+    }
+}
+```
+
+```log
+Starting ChromeDriver 98.0.4758.80 (7f0488e8ba0d8e019187c6325a16c29d9b7f4989-refs/branch-heads/4758@{#972}) on port 63949
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+Mar 09, 2022 3:58:12 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Mar 09, 2022 3:58:12 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find an exact match for CDP version 99, so returning the closest version found: 97
+Mar 09, 2022 3:58:12 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+INFO: Found CDP implementation for version 99 of 97
+```
+
+> Filename: logs/chrome_logs.log
+
+```log
+[1646778489.247][INFO]: Starting ChromeDriver 98.0.4758.80 (7f0488e8ba0d8e019187c6325a16c29d9b7f4989-refs/branch-heads/4758@{#972}) on port 63949
+[1646778489.247][INFO]: Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+[1646778490.502][INFO]: [9b298ffc3edc7d7bdc640488312a3483] COMMAND InitSession {
+   "capabilities": {
+      "firstMatch": [ {
+         "browserName": "chrome",
+         "goog:chromeOptions": {
+            "args": [  ],
+            "extensions": [  ]
+         }
+      } ]
+   },
+   "desiredCapabilities": {
+      "browserName": "chrome",
+      "goog:chromeOptions": {
+         "args": [  ],
+         "extensions": [  ]
+      }
+   }
+}
+[1646778490.503][INFO]: Populating Preferences file: {
+   "alternate_error_pages": {
+      "enabled": false
+   },
+   "autofill": {
+      "enabled": false
+   },
+   "browser": {
+      "check_default_browser": false
+   },
+   "distribution": {
+      "import_bookmarks": false,
+      "import_history": false,
+      "import_search_engine": false,
+      "make_chrome_default_for_user": false,
+      "skip_first_run_ui": true
+   },
+   "dns_prefetching": {
+      "enabled": false
+   },
+   "profile": {
+      "content_settings": {
+         "pattern_pairs": {
+            "https://*,*": {
+               "media-stream": {
+                  "audio": "Default",
+                  "video": "Default"
+               }
+            }
+         }
+      },
+      "default_content_setting_values": {
+         "geolocation": 1
+      },
+      "default_content_settings": {
+         "geolocation": 1,
+         "mouselock": 1,
+         "notifications": 1,
+         "popups": 1,
+         "ppapi-broker": 1
+      },
+      "password_manager_enabled": false
+   },
+   "safebrowsing": {
+      "enabled": false
+   },
+   "search": {
+      "suggest_enabled": false
+   },
+   "translate": {
+      "enabled": false
+   }
+}
+[1646778490.503][INFO]: Populating Local State file: {
+   "background_mode": {
+      "enabled": false
+   },
+   "ssl": {
+      "rev_checking": {
+         "enabled": false
+      }
+   }
+}
+[1646778490.504][INFO]: Launching chrome: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --allow-pre-commit-input --disable-background-networking --disable-client-side-phishing-detection --disable-default-apps --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --enable-automation --enable-blink-features=ShadowDOMV0 --enable-logging --log-level=0 --no-first-run --no-service-autorun --password-store=basic --remote-debugging-port=0 --test-type=webdriver --use-mock-keychain --user-data-dir=/var/folders/mq/9k9zz53d7sg8d2jthfvp2skckx697z/T/.com.google.Chrome.W60frr data:,
+[1646778492.079][WARNING]: This version of ChromeDriver has not been tested with Chrome version 99.
+[1646778492.099][INFO]: resolved localhost to ["::1","127.0.0.1"]
+[1646778492.157][INFO]: [9b298ffc3edc7d7bdc640488312a3483] RESPONSE InitSession {
+   "capabilities": {
+      "acceptInsecureCerts": false,
+      "browserName": "chrome",
+      "browserVersion": "99.0.4844.51",
+      "chrome": {
+         "chromedriverVersion": "98.0.4758.80 (7f0488e8ba0d8e019187c6325a16c29d9b7f4989-refs/branch-heads/4758@{#972})",
+         "userDataDir": "/var/folders/mq/9k9zz53d7sg8d2jthfvp2skckx697z/T/.com.google.Chrome.W60frr"
+      },
+      "goog:chromeOptions": {
+         "debuggerAddress": "localhost:65079"
+      },
+      "networkConnectionEnabled": false,
+      "pageLoadStrategy": "normal",
+      "platformName": "mac os x",
+      "proxy": {
+
+      },
+      "setWindowRect": true,
+      "strictFileInteractability": false,
+      "timeouts": {
+         "implicit": 0,
+         "pageLoad": 300000,
+         "script": 30000
+      },
+      "unhandledPromptBehavior": "dismiss and notify",
+      "webauthn:extension:credBlob": true,
+      "webauthn:extension:largeBlob": true,
+      "webauthn:virtualAuthenticators": true
+   },
+   "sessionId": "9b298ffc3edc7d7bdc640488312a3483"
+}
+[1646778492.401][INFO]: [9b298ffc3edc7d7bdc640488312a3483] COMMAND Navigate {
+   "url": "http://www.google.com"
+}
+[1646778492.417][INFO]: Waiting for pending navigations...
+[1646778492.419][INFO]: Done waiting for pending navigations. Status: ok
+[1646778493.348][INFO]: Waiting for pending navigations...
+[1646778494.424][INFO]: Done waiting for pending navigations. Status: ok
+[1646778494.424][INFO]: [9b298ffc3edc7d7bdc640488312a3483] RESPONSE Navigate
+[1646778494.433][INFO]: [9b298ffc3edc7d7bdc640488312a3483] COMMAND GetActiveElement {
+
+}
+[1646778494.433][INFO]: Waiting for pending navigations...
+[1646778494.434][INFO]: Done waiting for pending navigations. Status: ok
+[1646778494.437][INFO]: Waiting for pending navigations...
+[1646778494.437][INFO]: Done waiting for pending navigations. Status: ok
+[1646778494.437][INFO]: [9b298ffc3edc7d7bdc640488312a3483] RESPONSE GetActiveElement {
+   "element-6066-11e4-a52e-4f735466cecf": "6c321014-2ca9-4624-984f-69e30839bb3f"
+}
+[1646778494.447][INFO]: [9b298ffc3edc7d7bdc640488312a3483] COMMAND TypeElement {
+   "id": "6c321014-2ca9-4624-984f-69e30839bb3f",
+   "text": "Akshara Training",
+   "value": [ "A", "k", "s", "h", "a", "r", "a", " ", "T", "r", "a", "i", "n", "i", "n", "g", "" ]
+}
+[1646778494.447][INFO]: Waiting for pending navigations...
+[1646778494.448][INFO]: Done waiting for pending navigations. Status: ok
+[1646778494.594][INFO]: Waiting for pending navigations...
+[1646778496.990][INFO]: Done waiting for pending navigations. Status: ok
+[1646778496.990][INFO]: [9b298ffc3edc7d7bdc640488312a3483] RESPONSE TypeElement
+[1646778496.993][INFO]: [9b298ffc3edc7d7bdc640488312a3483] COMMAND CloseWindow {
+
+}
+[1646778497.172][INFO]: [9b298ffc3edc7d7bdc640488312a3483] RESPONSE CloseWindow [  ]
+```
+
+### Manually Adding Logs using Apache Log4j2
+
+```java
+// Example: Code to manually adding log messages using Apache Log4j2
+package com.aksharatraining.selenium.c01.basics;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P07_EnableSeleniumBrowserLogs_M3 {
+
+    static {
+        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
+        System.setProperty("log4j.configurationFile", "log4j2.properties");
+    }
+    
+    static final Logger logger = LogManager.getLogger(P07_EnableSeleniumBrowserLogs_M3.class);
+    
+    public static void main(String[] args) throws InterruptedException {
+        
+        WebDriver driver = new ChromeDriver();
+        
+        logger.info("****************************** starting test case *****************************************");
+        driver.get("http://www.google.com");
+        driver.switchTo().activeElement().sendKeys("Akshara Training", Keys.ENTER);
+        driver.close();
+        logger.info("****************************** ending test case *****************************************");
+    }
+}
+```
+
+> Filename: log4j2.properties
+
+```properties
+name = Log4j2PropertiesConfig
+status = warn
+property.basePath = logs
+appenders = console, file
+loggers = file
+
+# Redirect log messages to console [ConsoleAppender]
+appender.console.type = Console
+appender.console.name = STDOUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c:%L - %msg%n
+
+# Redirect log messages to a file [FileAppender]
+#appender.file.type = File
+#appender.file.name = LOGFILE
+#appender.file.fileName = ${basePath}/application.log
+#appender.file.layout.type = PatternLayout
+#appender.file.layout.pattern = [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c:%L - %msg%n
+
+# Redirect log messages to a log file, support file rolling [RollingFileAppender]
+appender.file.type = RollingFile
+appender.file.name = LOGFILE
+appender.file.fileName = ${basePath}/application.log
+appender.file.filePattern = ${basePath}/application_%d{yyyy-MM-dd}_%i.log
+appender.file.layout.type = PatternLayout
+appender.file.layout.pattern = [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c:%L - %msg%n
+appender.file.policies.type = Policies
+appender.file.strategy.type = DefaultRolloverStrategy
+# Ensure that within the same rollover period no more than 30 files are created when a size-based/time-based rollover was triggered  [%i is required in filePattern]
+# [TimeBasedTriggeringPolicy] If rolling over every day => Last 30 days of data will be recorded
+# [TimeBasedTriggeringPolicy] If rolling over every hour => Last 30 hours of data will be recorded
+# [SizeBasedTriggeringPolicy] If rolling over a file size of every 10 MB => At most 30 files will be recorded 
+appender.file.strategy.max = 30
+# To change log file once it exceeds the time interval [%d is required in filePattern]
+# Rolling over every minute: %d{yyyy-MM-dd-HH-mm}
+# Rolling over every hour: %d{yyyy-MM-dd-HH}
+# Rolling over every day: %d{yyyy-MM-dd}
+# Rolling over every month: %d{yyyy-MM}
+appender.file.policies.time.type = TimeBasedTriggeringPolicy
+appender.file.policies.time.interval = 1
+appender.file.policies.time.modulate = true
+# To change log file after file size exceeds 10MB
+appender.file.policies.size.type = SizeBasedTriggeringPolicy
+appender.file.policies.size.size = 10MB
+appender.file.strategy.delete.type = Delete
+appender.file.strategy.delete.basePath = ${basePath}
+# The maxDepth parameter is the maximum number of levels of directories to visit
+# A value of 0 means the directory itself, not the files in that directory, unless denied by the security manager
+# A value of MAX_VALUE may be used to indicate that all levels should be visited
+appender.file.strategy.delete.maxDepth = 1
+appender.file.strategy.delete.ifLastModified.type = IfLastModified
+# Delete all files older than 30 days
+appender.file.strategy.delete.ifLastModified.age = 30d
+
+# Classes in this package or sub-packages will use ConsoleAppender and RollingFileAppender for logging
+logger.file.name = com.aksharatraining.selenium.basics
+logger.file.level = info
+# By default, a logger inherits the appenders from its ancestors
+# By setting additivity="false", you prevent this behaviour
+# There may be appenders associated with com.aksharatraining.selenium or com.aksharatraining or even the root logger that would be inherited if you don't set that property to false
+logger.file.additivity = false
+logger.file.appenderRef.console.ref = STDOUT
+logger.file.appenderRef.file.ref = LOGFILE
+ 
+# Configure root logger for logging error logs in classes which are in package other than above specified package
+rootLogger.level = info
+rootLogger.appenderRefs = file, console
+rootLogger.appenderRef.console.ref = STDOUT
+rootLogger.appenderRef.file.ref = LOGFILE
+```
+
+> Filename: logs/application.log
+
+```log
+[INFO ] 2022-01-26 20:10:17.079 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:38 - ****************************** starting test case *****************************************
+[INFO ] 2022-01-26 20:10:24.012 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:42 - ****************************** ending test case *****************************************
+[INFO ] 2022-01-26 20:12:41.379 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:42 - ****************************** starting test case *****************************************
+[INFO ] 2022-01-26 20:12:46.597 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:46 - ****************************** ending test case *****************************************
+[INFO ] 2022-01-26 20:13:00.850 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:42 - ****************************** starting test case *****************************************
+[INFO ] 2022-01-26 20:13:07.023 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:46 - ****************************** ending test case *****************************************
+[INFO ] 2022-01-26 20:13:29.338 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:42 - ****************************** starting test case *****************************************
+[INFO ] 2022-01-26 20:13:36.287 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:46 - ****************************** ending test case *****************************************
+[INFO ] 2022-01-26 20:13:45.360 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:42 - ****************************** starting test case *****************************************
+[INFO ] 2022-01-26 20:13:50.911 [main] com.aksharatraining.selenium.basics.EnableSeleniumBrowserLogs_P3:46 - ****************************** ending test case *****************************************
+```
+
+__Note:__
+
+- What is logging? => Capturing info/activities at the time of program execution
+- How to generate the logs? => Using Apache log4j API [log4j-api.jar and log4j-core.jar]
+- How it works? => It reads the configuration from log4j2.properties file [support for XML, YAML and JSON is also there]
+- Different levels of logging supported by Log4j2:
+  - OFF: When no events will be logged
+  - FATAL: When a severe error will prevent the application from continuing
+  - ERROR: When an error in the application, possibly recoverable
+  - WARN: When an event that might possible lead to an error
+  - INFO: When an event for informational purposes
+  - DEBUG: When a general debugging event required
+  - TRACE: When a fine grained debug message, typically capturing the flow through the application
+  - ALL: When all events should be logged
+
 ## List of Exceptions
 
 | Exception                                         | Reason                                                                 |
@@ -645,8 +1577,15 @@ Automation is performing any task using any system or tool without any manual in
 | Filename: selenium-server-standalone-3.141.59.jar   | Filename: selenium-server-4.1.1.jar                                                    |
 | EdgeDriver and ChromeDriver extends RemoteWebDriver | EdgeDriver and ChromeDriver extends ChromiumDriver                                     |
 
-One time setup to hide the methods getting inherited from from Object class:
-Window -> Preferences -> Java -> Appearances -> Type Filters -> Add -> java.lang.Object -> OK
 
-https://demo.actitime.com/login.do
-https://opensource-demo.orangehrmlive.com
+## Extras: IDE Configuration (Eclipse)
+
+- Hide the methods getting inherited from from Object class:
+  1. Click on the `Window` tab
+  2. Go to `Preferences`
+  3. Expand `Java`
+  4. Expand `Appearance`
+  5. Click on the `Type Filters` option
+  6. Click on the `Add` button and type `java.lang.Object` in the textbox
+  7. Click on the `OK` button
+  8. Click on the `Apply and Close` button
