@@ -1,41 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="All Test Suite" duration-ms="183067" started-at="2021-08-02T01:20:42Z" finished-at="2021-08-02T01:23:45Z">
+  <suite name="All Test Suite" duration-ms="53885" started-at="2021-08-25T19:24:38Z" finished-at="2021-08-25T19:25:32Z">
     <groups>
     </groups>
-    <test name="EShipperTestOnChrome" duration-ms="183067" started-at="2021-08-02T01:20:42Z" finished-at="2021-08-02T01:23:45Z">
-      <class name="com.eshipper.tests.BookShipmentFromShipTest">
-        <test-method status="PASS" signature="init()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="init" is-config="true" duration-ms="18826" started-at="2021-08-02T01:20:42Z" finished-at="2021-08-02T01:21:01Z">
+    <test name="EShipperTestOnChrome" duration-ms="53885" started-at="2021-08-25T19:24:38Z" finished-at="2021-08-25T19:25:32Z">
+      <class name="com.eshipper.tests.RandomTest">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.eshipper.tests.RandomTest@b97c004]" name="init" is-config="true" duration-ms="16529" started-at="2021-08-25T19:24:38Z" finished-at="2021-08-25T19:24:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="loginTest" duration-ms="4429" started-at="2021-08-02T01:21:01Z" finished-at="2021-08-02T01:21:05Z">
+        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.eshipper.tests.RandomTest@b97c004]" name="loginTest" duration-ms="4523" started-at="2021-08-25T19:24:55Z" finished-at="2021-08-25T19:24:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method status="PASS" signature="navigateToShipDetailsTest()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="navigateToShipDetailsTest" duration-ms="17766" started-at="2021-08-02T01:21:05Z" depends-on-methods="com.eshipper.tests.BookShipmentFromShipTest.loginTest" finished-at="2021-08-02T01:21:23Z">
+        <test-method status="PASS" signature="navigateToStoreSettingsTest()[pri:0, instance:com.eshipper.tests.RandomTest@b97c004]" name="navigateToStoreSettingsTest" duration-ms="31803" started-at="2021-08-25T19:24:59Z" depends-on-methods="com.eshipper.tests.RandomTest.loginTest" finished-at="2021-08-25T19:25:31Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- navigateToShipDetailsTest -->
-        <test-method status="PASS" signature="navigateToOrderSummaryTest()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="navigateToOrderSummaryTest" duration-ms="134445" started-at="2021-08-02T01:21:23Z" depends-on-methods="com.eshipper.tests.BookShipmentFromShipTest.navigateToShipDetailsTest" finished-at="2021-08-02T01:23:37Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- navigateToOrderSummaryTest -->
-        <test-method status="PASS" signature="verifyDetailsInOrderSummaryTest()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="verifyDetailsInOrderSummaryTest" duration-ms="6578" started-at="2021-08-02T01:23:37Z" depends-on-methods="com.eshipper.tests.BookShipmentFromShipTest.navigateToOrderSummaryTest" finished-at="2021-08-02T01:23:44Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- verifyDetailsInOrderSummaryTest -->
-        <test-method status="PASS" signature="logout()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="logout" is-config="true" duration-ms="263" started-at="2021-08-02T01:23:44Z" finished-at="2021-08-02T01:23:44Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- logout -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.eshipper.tests.BookShipmentFromShipTest@5afa04c]" name="tearDown" is-config="true" duration-ms="732" started-at="2021-08-02T01:23:44Z" finished-at="2021-08-02T01:23:45Z">
+        </test-method> <!-- navigateToStoreSettingsTest -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.eshipper.tests.RandomTest@b97c004]" name="tearDown" is-config="true" duration-ms="1011" started-at="2021-08-25T19:25:31Z" finished-at="2021-08-25T19:25:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.eshipper.tests.BookShipmentFromShipTest -->
+      </class> <!-- com.eshipper.tests.RandomTest -->
     </test> <!-- EShipperTestOnChrome -->
   </suite> <!-- All Test Suite -->
 </testng-results>

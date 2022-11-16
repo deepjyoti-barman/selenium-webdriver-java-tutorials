@@ -1,0 +1,13 @@
+
+f	java:S117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üý›ê
+s	java:S116"^Rename this field "DEFAULT_CONFIG_PATH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»šÜŠ
+n	java:S116"TRename this field "MAX_RETRY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆÚ¦ðÿÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(»šÜŠ
+<
+java:S1170"!Make this final field static too.(ˆÚ¦ðÿÿÿÿÿ
+H
+java:S1905-"-Remove this unnecessary cast to "WebElement".(¾ØÕåüÿÿÿÿ
+P	java:S125M"<This block of commented-out lines of code should be removed.(¨˜ì
+C
+java:S1905e"-Remove this unnecessary cast to "WebElement".(¶•Ì

@@ -42,7 +42,7 @@ public class TestBase {
             driver.findElement(By.cssSelector("#password")).sendKeys(CoreUtils.getProperty("password", DEFAULT_CONFIG_PATH));
             test.info("Entered '" + CoreUtils.getProperty("password", DEFAULT_CONFIG_PATH) + "' into the password text field");
 
-            ((WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")))).click();
+            ((WebElement) wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Login']")))).click();
             test.info("Clicked on the 'Login' button");
             test.info("Login to the application with valid credentials is successful");
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public class TestBase {
         extent.flush();
 
         if (driver != null)
-//            driver.quit();
+            driver.quit();
 
         CoreUtils.killChromeDriver();
     }
