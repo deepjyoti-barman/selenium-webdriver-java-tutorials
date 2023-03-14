@@ -14,7 +14,7 @@ Scenario:
         - Current World Population
         - Today: Births, Deaths and Population Growth
         - This Year: Births, Deaths and Population Growth
-    3. Print the values on console for every second till 20 seconds
+    3. Print the values on console for every second till 10 seconds
  */
 public class DynamicElementsHandlerTest extends BaseTest {
 
