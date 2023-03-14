@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+}
+
+group 'dev.selenium'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+ext {
+    seleniumJavaVersion = '4.8.1'
+    ownerVersion = '1.0.12'
+    testngVersion = '7.7.1'
+    assertjCoreVersion = '3.24.2'
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumJavaVersion}"
+
+    // https://mvnrepository.com/artifact/org.aeonbits.owner/owner
+    implementation "org.aeonbits.owner:owner:${ownerVersion}"
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testImplementation "org.testng:testng:${testngVersion}"
+
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation "org.assertj:assertj-core:${assertjCoreVersion}"
+
+}
+
+test {
+    // Discover and execute TestNG-based tests
+    useTestNG() {
+        suites 'src/test/resources/testRunners/testng.xml'
+//        includeGroups 'smoke', 'sanity'
+//        excludeGroups 'regression'
+
+        // Default value of useDefaultListeners is false
+        // To generate the TestNG report its mandatory to turn this value on
+        useDefaultListeners = true
+        outputDirectory = file("$projectDir/reports/testngReport")
+    }
+
+    reports {
+        html.outputLocation = file("$projectDir/reports/gradleReport")
+    }
+
+    // Display the following test events
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+
+    }
+
+    // Show standard out and standard error of the test JVM(s) on the console
+    testLogging.showStandardStreams = true
+
+    // Fail the 'test' task on the first test failure
+//    failFast = true
+
+    // Explicitly include or exclude tests
+//    include 'org/foo/**'
+//    exclude 'org/boo/**'
+
+    // Set a system property for the test JVM(s)
+//    systemProperty 'some.prop', 'value'
+    systemProperties = System.getProperties();
+}

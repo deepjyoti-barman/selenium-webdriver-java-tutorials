@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.selenium.tests.DynamicElementsHandlerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-14T11:54:17" hostname="MacBook-Pro-M1.local" time="52.173">
+  <properties/>
+  <testcase name="testToPrintDataValuesFor20secs" classname="dev.selenium.tests.DynamicElementsHandlerTest" time="52.173"/>
+  <system-out><![CDATA[Timer Counter: 1 sec(s)
+Current Population: 8,021,839,241
+Births Today: 266,396
+Deaths Today: 133,399
+Population Growth Today: 132,997
+Births This Year : 26,697,331
+Deaths This Year: 13,368,773
+Population Growth This Year: 13,328,559
+-------------------------------------------------------------------
+Timer Counter: 2 sec(s)
+Current Population: 8,021,839,244
+Births Today: 266,401
+Deaths Today: 133,401
+Population Growth Today: 133,000
+Births This Year : 26,697,336
+Deaths This Year: 13,368,775
+Population Growth This Year: 13,328,561
+-------------------------------------------------------------------
+Timer Counter: 3 sec(s)
+Current Population: 8,021,839,247
+Births Today: 266,406
+Deaths Today: 133,404
+Population Growth Today: 133,002
+Births This Year : 26,697,341
+Deaths This Year: 13,368,778
+Population Growth This Year: 13,328,563
+-------------------------------------------------------------------
+Timer Counter: 4 sec(s)
+Current Population: 8,021,839,248
+Births Today: 266,410
+Deaths Today: 133,406
+Population Growth Today: 133,004
+Births This Year : 26,697,345
+Deaths This Year: 13,368,780
+Population Growth This Year: 13,328,565
+-------------------------------------------------------------------
+Timer Counter: 5 sec(s)
+Current Population: 8,021,839,251
+Births Today: 266,415
+Deaths Today: 133,408
+Population Growth Today: 133,007
+Births This Year : 26,697,350
+Deaths This Year: 13,368,782
+Population Growth This Year: 13,328,568
+-------------------------------------------------------------------
+Timer Counter: 6 sec(s)
+Current Population: 8,021,839,253
+Births Today: 266,420
+Deaths Today: 133,411
+Population Growth Today: 133,009
+Births This Year : 26,697,355
+Deaths This Year: 13,368,785
+Population Growth This Year: 13,328,570
+-------------------------------------------------------------------
+Timer Counter: 7 sec(s)
+Current Population: 8,021,839,255
+Births Today: 266,425
+Deaths Today: 133,413
+Population Growth Today: 133,012
+Births This Year : 26,697,360
+Deaths This Year: 13,368,787
+Population Growth This Year: 13,328,573
+-------------------------------------------------------------------
+Timer Counter: 8 sec(s)
+Current Population: 8,021,839,258
+Births Today: 266,429
+Deaths Today: 133,415
+Population Growth Today: 133,014
+Births This Year : 26,697,364
+Deaths This Year: 13,368,789
+Population Growth This Year: 13,328,575
+-------------------------------------------------------------------
+Timer Counter: 9 sec(s)
+Current Population: 8,021,839,261
+Births Today: 266,434
+Deaths Today: 133,418
+Population Growth Today: 133,016
+Births This Year : 26,697,369
+Deaths This Year: 13,368,792
+Population Growth This Year: 13,328,577
+-------------------------------------------------------------------
+Timer Counter: 10 sec(s)
+Current Population: 8,021,839,262
+Births Today: 266,438
+Deaths Today: 133,420
+Population Growth Today: 133,018
+Births This Year : 26,697,373
+Deaths This Year: 13,368,794
+Population Growth This Year: 13,328,579
+-------------------------------------------------------------------
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

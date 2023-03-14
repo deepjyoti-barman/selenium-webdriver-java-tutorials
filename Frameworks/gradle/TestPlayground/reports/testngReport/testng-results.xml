@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-03-14T17:24:08 IST" name="All Test Suite" finished-at="2023-03-14T17:25:10 IST" duration-ms="61581">
+    <groups>
+    </groups>
+    <test started-at="2023-03-14T17:24:08 IST" name="/Users/deepjyoti.barman/programming-platform/intellij-workspace/TestPlayground" finished-at="2023-03-14T17:25:10 IST" duration-ms="61581">
+      <class name="dev.selenium.tests.DynamicElementsHandlerTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:dev.selenium.tests.DynamicElementsHandlerTest@52c3cb31]" started-at="2023-03-14T17:24:08 IST" name="init" finished-at="2023-03-14T17:24:17 IST" duration-ms="9379" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method signature="testToPrintDataValuesFor20secs()[pri:0, instance:dev.selenium.tests.DynamicElementsHandlerTest@52c3cb31]" started-at="2023-03-14T17:24:17 IST" name="testToPrintDataValuesFor20secs" finished-at="2023-03-14T17:25:10 IST" duration-ms="52173" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testToPrintDataValuesFor20secs -->
+        <test-method is-config="true" signature="terminate()[pri:0, instance:dev.selenium.tests.DynamicElementsHandlerTest@52c3cb31]" started-at="2023-03-14T17:25:10 IST" name="terminate" finished-at="2023-03-14T17:25:10 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- terminate -->
+      </class> <!-- dev.selenium.tests.DynamicElementsHandlerTest -->
+    </test> <!-- /Users/deepjyoti.barman/programming-platform/intellij-workspace/TestPlayground -->
+  </suite> <!-- All Test Suite -->
+</testng-results>
