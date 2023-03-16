@@ -85,6 +85,60 @@
 
 Automation is performing any task using any system or tool without any manual intervention.
 
+### Why do we need automation?
+
+Software Development Life Cycle (SDLC) is a process or methodology used by the software industry to design, develop and test high quality softwares. The SDLC aims to produce a high-quality software that meets or exceeds customer expectations, reaches completion within times and cost estimates. It follows the following phases:
+  
+- Software Development Life Cycle (SDLC)
+  - Requirement Gathering
+  - Feasibility Study (Understand whether the given requirement can be built or not)
+  - Design
+    - High Level Design
+    - Low Level Design
+  - Testing
+    - Software Test Life Cycle (STLC)
+  - Deployment
+  - Support & Maintenance
+
+- Software Test Life Cycle (STLC)
+  - System Study (Understand the behavior of the application)
+  - Test Plan
+  - Test Cases -> Test case life cycle, Traceability matrix etc.
+  - Test Execution -> Test environment, Test data etc.
+  - Defect Life Cycle
+  - Reporting
+  - Retrospect Meeting
+
+- Test Cases
+  - Functional Test cases
+    - Integration test cases
+    - System test cases
+  - Non-functional test cases
+    - Performance test cases
+    - Security test cases
+    - Usability test cases
+
+__Note:__ Requirement Gathering is not a part of STLC because at the start of SDLC requirement is already been gathered. Feasibility Study is also not a part of STLC because anything on this earth can be tested as long as we have everything (test environment, test data etc) in place.
+
+__Note:__ With selenium we can only automate the functional test cases
+
+- When developer can share a new build because of following reasons
+  - Bug fix
+  - Addition of new requirement/feature
+  - Modification of new requirement/feature
+  - Deletion of new requirement/feature
+- When testing team receives the new build, testing team should retest the given build, which is also known as regression testing. Repetitively testing the same features again and again is known as regression testing. Disadvantages of regression testing is:
+  - Cost taking process, need more money
+  - Effort taking process, need more man power and expertise
+  - Chances of making mistakes are involved
+  - Testing process might delay the deployment or release dates
+- Because of the above reasons we go for automating the regression testing process, as we have to test the same test cases again and again numerous times if there comes any addition, update, deletion or fix in an existing feature/module. There are certain disadvantages of automation as well:
+  - A completely new/unstable feature can't be automated
+  - Certain features that involves in OTP generation, captcha etc. can't be automated
+  - Automation requires more expertise professionals for converting the functional test cases into automation scripts
+  - Success of all automation test cases can't guarantee 100% bug free product
+  - Maintenance of the automated test cases from time to time is an extra overhead
+
 ### What is Selenium?
 
 - Selenium is a free and open source web application automation tool.
