@@ -14,6 +14,10 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.Optional;
 
+/**
+ * This test includes a Selenium 4 feature of directly accessing CDP (Chrome DevTools Protocol) commands from the WebDriver
+ * and emulate a mobile device of given screen dimensions and user-agent string.
+ */
 public class T02_MMTMobileSiteTest {
 
     @Test
