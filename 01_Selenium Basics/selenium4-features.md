@@ -144,24 +144,32 @@
   - Screenshot of a WebElement
 
     - Screenshot can be of an input-box or a section as well as long as we treat it as an element.
-    - Code Snippet:
+    - Code Snippet (classic):
 
       ```java
       WebElement loginForm = driver.findElement(By.className("oxd-form"));
-      File partialScreenshhot = loginForm.getScreenshotAs(OutputType.FILE);
-      FileHandler.copy(partialScreenshhot, new File("src/test/resources/screenshots/login-form.png"));
+      File partialScreenshot1 = ((TakesScreenshot) loginForm).getScreenshotAs(OutputType.FILE);
+      FileHandler.copy(partialScreenshot1, new File("src/test/resources/screenshots/login-form1.png"));
+      ```
+
+    - Code Snippet (new):
+
+      ```java
+      WebElement loginForm = driver.findElement(By.className("oxd-form"));
+      File partialScreenshot2 = loginForm.getScreenshotAs(OutputType.FILE);
+      FileHandler.copy(partialScreenshot2, new File("src/test/resources/screenshots/login-form2.png"));
       ```
 
   - Screenshot of the current visible view-port (classic and new ways)
 
-    - Code snippet of the classic way:
+    - Code snippet (classic):
 
       ```java
       File viewPortScreenshot1 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
       FileHandler.copy(viewPortScreenshot1, new File("src/test/resources/screenshots/view-port1.png"));
       ```
 
-    - Code snippet of the new way:
+    - Code snippet (new):
 
       ```java
       File viewPortScreenshot2 = ((ChromeDriver) driver).getScreenshotAs(OutputType.FILE);

@@ -25,7 +25,7 @@ public class T05_ViewPortScreenshotTest {
         driver.manage().window().maximize();
         driver.get("https://tutorialsninja.com/demo/");
 
-        // Old way to capture the screenshot of the current visible view-port
+        // Classic way to capture the screenshot of the current visible view-port
         File viewPortScreenshot1 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(viewPortScreenshot1, new File("src/test/resources/screenshots/view-port1.png"));
 
@@ -35,7 +35,7 @@ public class T05_ViewPortScreenshotTest {
 
         Assertions.assertThatCode(() -> {
             Assertions.assertThat(viewPortScreenshot1)
-                    .withFailMessage("Partial screenshot of the view-port is not captured in old way")
+                    .withFailMessage("Partial screenshot of the view-port is not captured in classic way")
                     .exists();
 
             Assertions.assertThat(viewPortScreenshot2)
