@@ -1,4 +1,4 @@
-package com.makemytrip.tests;
+package com.makemytrip.selenium4.tests;
 
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.Assertions;
@@ -15,7 +15,7 @@ import java.time.Duration;
 /**
  * This test includes a Selenium 4 feature to capture the screenshot of the visible view-port in both old and new ways.
  */
-public class T05_ViewPortScreenshotTest {
+public class T03_ViewPortScreenshotTest {
 
     @Test
     public void tc001_captureViewPortScreenshotTest() throws IOException {

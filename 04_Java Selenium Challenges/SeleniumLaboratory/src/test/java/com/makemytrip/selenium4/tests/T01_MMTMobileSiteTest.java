@@ -1,4 +1,4 @@
-package com.makemytrip.tests;
+package com.makemytrip.selenium4.tests;
 
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
@@ -18,7 +18,7 @@ import java.util.Optional;
  * This test includes a Selenium 4 feature of directly accessing CDP (Chrome DevTools Protocol) commands from the WebDriver
  * and emulate a mobile device of given screen dimensions and user-agent string.
  */
-public class T02_MMTMobileSiteTest {
+public class T01_MMTMobileSiteTest {
 
     @Test
     public void tc001_verifyAvailabilityOfAllBookingOptionsTest() throws InterruptedException {

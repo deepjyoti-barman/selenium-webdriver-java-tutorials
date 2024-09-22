@@ -1,4 +1,4 @@
-package com.makemytrip.tests;
+package com.makemytrip.selenium4.tests;
 
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.OutputType;
@@ -15,7 +15,7 @@ import java.time.Duration;
  * This test includes a Selenium 4 feature to capture the screenshot of the complete webpage.
  * NOTE: This feature is available only for Firefox browser.
  */
-public class T06_FullPageScreenshotTest {
+public class T04_FullPageScreenshotTest {
 
     @Test
     public void tc001_captureFullPageScreenshotTest() throws IOException {

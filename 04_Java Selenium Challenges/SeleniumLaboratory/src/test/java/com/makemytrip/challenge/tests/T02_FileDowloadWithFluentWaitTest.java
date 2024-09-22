@@ -1,4 +1,4 @@
-package com.makemytrip.tests;
+package com.makemytrip.challenge.tests;
 
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Map;
 
-public class T03_FileDowloadWithFluentWaitTest {
+public class T02_FileDowloadWithFluentWaitTest {
 
     @Test
     public void tc001_downloadFileTest() {

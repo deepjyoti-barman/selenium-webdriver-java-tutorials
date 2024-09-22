@@ -1,4 +1,4 @@
-package com.makemytrip.tests;
+package com.makemytrip.selenium4.tests;
 
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.*;
@@ -13,7 +13,7 @@ import java.time.Duration;
 /**
  * This test includes a Selenium 4 feature to capture partial screenshot of a WebElement.
  */
-public class T04_PartialScreenshotOfWebElementTest {
+public class T02_PartialScreenshotOfWebElementTest {
 
     @Test
     public void tc001_captureWebElementScreenshotTest() throws IOException {

@@ -11,6 +11,8 @@
 - Deprecation of `DesiredCapabilities` class
 - Modifications in the Actions class
 - New ways to take screenshots
+- Changes for Implicit Wait, WebDriverWait and FluentWait
+- getRect() for getting both location and size
 
 ## Selenium is now W3C Compliant
 
@@ -45,13 +47,14 @@
 
 ## Better window/tab management
 
-- Earlier to open a new/window we had to create a new driver session, and it was very difficult ot manage a single session of WebDriver.
-- Now we can work with multiple windows or tabs in the same session.
-- We can now open multiple windows/tabs without creating new driver object.
+- Earlier opening a new tab via a script written on Selenium 3 was not possible, if developer has written code in such a way to open any link on a new tab - we would then switch to it via `driver.switchTo().window("<window_handle_string")`. On the other hand to open a new window and then load a new URL on it we had to create a new driver session.
+- From Selenium 4, apart from switching to a new window or tab, we can also create a new window or new tab and then switch to them.
+- Now we can work with multiple windows or tabs in the same session i.e. we can now open multiple windows/tabs without creating new driver object.
 - Open a new window and switch to the window:  
   `driver.switchTo().newWindow(WindowType.WINDOW);`
 - Open a new tab and switch to the tab:  
   `driver.switchTo().newWindow(WindowType.TAB);`
+- This feature helps us opening multiple applications at the same time.
 
 ## Improved Selenium Grid
 
@@ -185,3 +188,58 @@
       File fullPageScreenshot = ((FirefoxDriver) driver).getFullPageScreenshotAs(OutputType.FILE);
       FileHandler.copy(fullPageScreenshot, new File("src/test/resources/screenshots/full-page.png"));
       ```
+
+## Changes for Implicit Wait, WebDriverWait and FluentWait
+
+- In Selenium 4, the way we represent the time for Implicit Wait, WebDriverWait and FluentWait got deprecated.
+- We have to use `Duration.ofSeconds(x)` going ahead.
+- Code snippet (deprecated):
+
+  ```java
+  // Implicit wait
+  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+  // WebDriver wait
+  WebDriverWait webDriverWait = new WebDriverWait(driver, 20);
+
+  // Fluent Wait
+  FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(10, TimeUnit.SECONDS)
+                .pollingEvery(2, TimeUnit.SECONDS)
+                .ignoring(NoSuchElementException.class);
+
+  ```
+
+- Code snippet (new):
+
+  ```java
+  // Implicit wait
+  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+  // WebDriver wait
+  WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+  // Fluent wait
+  FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
+
+  ```
+
+## getRect() for getting both location and size
+
+- In Selenium 3, we had two separate methods to get the size and the location of the elements.
+- `getLocation()` method is used to get the x and y co-ordinates of an element, while `getSize()` is used to get the height and width of an element.
+- In Selenium 4 we got another method called `getRect()` which will help us getting both size and location of an element.
+- Code snippet:
+
+  ```java
+  WebElement iPhone12Image = driver.findElement(By.xpath("//img[@alt='iPhone 12']"));
+  Rectangle rect = iPhone12Image.getRect();
+
+  System.out.println("Height: " + rect.getHeight());
+  System.out.println("Width: " + rect.getWidth());
+  System.out.println("X: " + rect.getX());
+  System.out.println("Y: " + rect.getY());
+  ```

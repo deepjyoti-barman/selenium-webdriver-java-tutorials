@@ -1,4 +1,4 @@
-package com.makemytrip.tests;
+package com.makemytrip.challenge.tests;
 
 import com.makemytrip.util.ExcelReader;
 import org.assertj.core.api.Assertions;
