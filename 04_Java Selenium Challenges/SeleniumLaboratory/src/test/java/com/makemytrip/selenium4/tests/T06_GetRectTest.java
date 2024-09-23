@@ -14,8 +14,8 @@ public class T06_GetRectTest {
     public void tc001_getRectTest() {
 
         WebDriver driver = new ChromeDriver();
-        driver.get("https://bstackdemo.com/");
         driver.manage().window().maximize();
+        driver.get("https://bstackdemo.com/");
 
         WebElement iPhone12Image = driver.findElement(By.xpath("//img[@alt='iPhone 12']"));
         Rectangle rect = iPhone12Image.getRect();
